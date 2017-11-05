@@ -1,15 +1,28 @@
-var word = "table"
-var wordArray = word.split("")
-var inputField = document.getElementById("letterInput")
-  inputField.onKeyUp = function(event) {
-  var matched = false
-  for (var i=0; i< wordArray.length; i++) {
-    if (event.key === wordArray[i]) {
-      alert("it matched! " + wordArray[i])
-      matched = true
+var words = ["table", "door", "chair", "couch", "lamp", "carpet", "floor"]
+var randoWord = words[Math.floor(Math.random() * words.length)];
+var wordArray = randoWord.split("");
+var answerArray = [];
+    for (var i = 0; i < randoWord.length; i++) {
+        answerArray[i] = "__";
     }
-  }
-  if (matched === false) {
-    alert("try again sucka")
-  }
+var remainingLetters = randoWord.length;
+var guessesLeft = 9;
+var wins = [];
+
+    document.onkeyup = function(event) { // press a button and it tells you if the letter is correct
+        var playerGuess = event.key;
+        
+        for (var i=0; i< wordArray.length; i++) {
+            if (event.key === wordArray[i]) {
+                var pressedKeyMatch = ("it matched! " + wordArray[i])
+            } else if ("wrong! ");
+          
+
+        var html =
+            "<p>Randomly Generated Word: " + randoWord + "</p>" +
+            "<p>Chosen letter: " + pressedKeyMatch + "</p>" +
+            "<p>Here's 'dem blanks: " + answerArray + "</p>";
+        
+        document.querySelector("#hangman").innerHTML = html;
+    }
 }
