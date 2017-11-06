@@ -14,9 +14,11 @@ var wins = [];
         
         for (var i=0; i< wordArray.length; i++) {
             if (event.key === wordArray[i]) {
-                var pressedKeyMatch = ("it matched! " + wordArray[i])
-            } else if ("wrong! ");
-          
+                var pressedKeyMatch = ("it matched! " + wordArray[i]);
+            } else {
+                var pressedKeyMaatch = ("wrong! "+ wordArray[i]);
+            }
+        
 
         var html =
             "<p>Randomly Generated Word: " + randoWord + "</p>" +
