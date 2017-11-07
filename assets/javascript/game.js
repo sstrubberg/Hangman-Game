@@ -1,4 +1,4 @@
-var words = ["table", "door", "chair", "couch", "lamp", "carpet", "floor"]
+var words = ["thomas", "percy", "james", "marion", "stephen", "rosie", "gordon"]
 var randoWord = words[Math.floor(Math.random() * words.length)];
 var wordArray = randoWord.split("");
 var answerArray = [];
@@ -14,7 +14,7 @@ var guessedLetters = [];
     document.onkeyup = function(event) { // press a button and it tells you if the letter is correct
         if (gameStarted === false) {
             gameStarted = true;
-            displayResults(randoWord, "No key pressed yet!", guessedLetters, answerArray);
+            displayResults(randoWord, "No key pressed yet!", guessedLetters, guessesLeft, answerArray);
             return
         }
 
@@ -30,15 +30,20 @@ var guessedLetters = [];
         }
         if (pressedKeyMatch === "") {
             pressedKeyMatch = ("wrong! " + guessedLetters[guessedLetters.length-1]);
+            guessesLeft = (guessesLeft-1);
+            if (guessesLeft === 0) {
+                guessesLeft=("You lose!")
+            }
         }
-        displayResults(randoWord, pressedKeyMatch, guessedLetters, answerArray);
+        displayResults(randoWord, pressedKeyMatch, guessedLetters, guessesLeft, answerArray);
         }
 
-function displayResults(randoWord, pressedKeyMatch, guessedLetters, answerArray) {
+function displayResults(randoWord, pressedKeyMatch, guessedLetters, guessesLeft, answerArray) {
     var html =
         "<p>Randomly Generated Word: " + randoWord + "</p>" +
         "<p>Chosen letter: " + pressedKeyMatch + "</p>" +
         "<p>Here's all the letter's you've guessed: " + guessedLetters + "</p>" +
+        "<p>Guesses left: " + guessesLeft + "</p>" +
         "<p>Here's 'dem blanks: " + answerArray + "</p>";
     
     document.querySelector("#hangman").innerHTML = html
