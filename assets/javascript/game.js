@@ -5,6 +5,7 @@ var answerArray = [];
     for (var i = 0; i < randoWord.length; i++) {
         answerArray[i] = "__";
     }
+    
 var remainingLetters = randoWord.length;
 var guessesLeft = 9;
 var wins = [];
@@ -20,31 +21,36 @@ var guessedLetters = [];
 
         var playerGuess = event.key;
         var pressedKeyMatch = "";
-        guessedLetters.push(event.key);
         
-        for (var i=0; i< wordArray.length; i++) {
-            if (event.key === wordArray[i]) {
-                pressedKeyMatch = ("it matched! " + wordArray[i]);
-                answerArray[i] = event.key;
+        
+        if (guessesLeft > 0) {
+            guessedLetters.push(event.key);
+            for (var i=0; i< wordArray.length; i++) {
+                if (event.key === wordArray[i]) {
+                    pressedKeyMatch = ("it matched! " + wordArray[i]);
+                    answerArray[i] = event.key;
+                }
             }
-        }
-        if (pressedKeyMatch === "") {
-            pressedKeyMatch = ("wrong! " + guessedLetters[guessedLetters.length-1]);
-            guessesLeft = (guessesLeft-1);
-            if (guessesLeft === 0) {
-                guessesLeft=("You lose!")
+            if (pressedKeyMatch === "") {
+                pressedKeyMatch = ("wrong! " + guessedLetters[guessedLetters.length-1]);
+                guessesLeft = (guessesLeft-1);
+                 
             }
+        } else {
+            //
         }
         displayResults(randoWord, pressedKeyMatch, guessedLetters, guessesLeft, answerArray);
-        }
+    }
 
 function displayResults(randoWord, pressedKeyMatch, guessedLetters, guessesLeft, answerArray) {
+    answerArray.toString();
+    guessedLetters.toString();
     var html =
         "<p>Randomly Generated Word: " + randoWord + "</p>" +
         "<p>Chosen letter: " + pressedKeyMatch + "</p>" +
-        "<p>Here's all the letter's you've guessed: " + guessedLetters + "</p>" +
+        "<p>Here's all the letter's you've guessed: " + guessedLetters.join(" ") + "</p>" +
         "<p>Guesses left: " + guessesLeft + "</p>" +
-        "<p>Here's 'dem blanks: " + answerArray + "</p>";
+        "<p>Here's 'dem blanks: " + answerArray.join(" ") + "</p>";
     
     document.querySelector("#hangman").innerHTML = html
 }
